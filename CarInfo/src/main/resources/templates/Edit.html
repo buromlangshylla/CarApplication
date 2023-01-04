@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <!---Fontawesome CDN Link-->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
+<style>
+*{
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
+  list-style: none;
+  box-sizing: border-box;
+}
+button.logout {
+    border: blue;
+    width: 67px;
+    height: 31px;
+    background: blue;
+    border-radius: 36px;
+    font-size: 18px;
+    position: relative;
+    font-weight: bolder;
+    margin-left: 504px;
+    top: 60px;
+}
+
+body{
+  font-family: montserrat;
+}
+nav{
+  background: #022f69;
+  height: 80px;
+  width: 100%;
+}
+label.logo{
+  color: #fff;
+  font-size: 35px;
+  line-height: 80px;
+  padding: 0 100px;
+  font-weight: bold;
+}
+nav ul{
+  float: right;
+  margin-right: 20px;
+}
+nav ul li{
+  display: inline-block;
+  line-height: 80px;
+  margin: 0 5px;
+}
+nav ul li a{
+  color: #fff;
+  font-size: 17px;
+  padding: 7px 13px;
+  border-radius: 3px;
+  text-transform: uppercase;
+}
+a.active,a:hover{
+  background: #fff;
+  transition: .5s;
+  color: #022f69;
+}
+.checkbtn{
+  font-size: 30px;
+  color: #fff;
+  float: right;
+  line-height: 80px;
+  margin-right: 40px;
+  cursor: pointer;
+  display: none;
+}
+#check{
+  display: none;
+}
+@media (max-width: 968px){
+  label.logo{
+    font-size: 30px;
+    padding-left: 50px;
+  }
+  nav ul li a{
+    font-size: 16px;
+  }
+}
+@media (max-width: 875px){
+  .checkbtn{
+    display: block;
+  }
+  nav ul{
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    background: #27282c;
+    top: 80px;
+    left: -100%;
+    text-align: center;
+    transition: all .5s;
+  }
+  nav ul li{
+    display: block;
+    margin: 50px 0;
+    line-height: 30px;
+  }
+  nav ul li a{
+    font-size: 20px;
+  }
+  a:hover, a.active{
+    background: none;
+    color: #0082e6;
+  }
+  #check:checked ~ ul{
+    left: 0;
+  }
+}
+button.insert{
+width: 67px;
+    height: 31px;
+    background: #022f69;
+    border-radius: 36px;
+    font-size: 18px;
+}   
+form {  
+    padding-left: 133px;
+    font-size: 27px;
+    padding-right: 64px;
+}
+div.divUpdate{
+padding-top: 5opx;
+}
+input{
+font-size: 22px;
+}
+/*--------------------------------------------*/
+#customers {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+#customers tr:hover {background-color: #ddd;}
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #04AA6D;
+  color: white;
+}
+</style>
+</head>
+<body>
+  <nav>
+    <input type="checkbox" id="check">
+    <label for="check" class="checkbtn">
+    <i class="fas fa-bars"></i>
+    </label>
+    <label class="logo">CarInfo</label>
+    <ul>
+      <li><a class="active" href="http://localhost:8080/updateTest">Update</a></li>
+      <li><a href="http://localhost:8080/insertPage">Insert</a></li>
+      <li><a href="http://localhost:8080/deletePage">Delete</a></li>
+      <li><a href="http://localhost:8080/searchInPage">Search</a></li>
+      <li><a href="http://localhost:8080/prelogout">logout</a></li>    
+    </ul>
+  </nav> <br><br>
+  <div class="divUpdate">
+<form action="updatating" method="post" th:object=${Car_Details} autocomplete="off" padding-left: 414px;>
+<input type="text" placeholder="enter ID" style="padding-left: 116px;" name="carId" th:value="${carId}" id="carId">
+<a href="http://localhost:8080/updateLogic" onclick="this.href='updateLogic?carId='+getElementById('carId').value">
+<i class="fa fa-search" aria-hidden="true" width="300px"></i></a></input> <br><br>
+<p style="color: red" name="error" id="error" th:text="${error}" />
+<table id="customers"><tbody>
+  <tr><td><label>Car Name:</label></td>
+  <td><input type="text" placeholder="enter carName" name="carName" th:value="${carName}" id="carName"></input></td></tr>
+  <tr><td><label for="pName">Company Name:</label></td>
+  <td><input type="text" placeholder="enter carCompany" name="carCompany" th:value="${carCompany}" id="carCompany"></input></td></tr>
+  <tr><td><label>Fuel Type: </label></td> 
+  <td><input type="text" placeholder="enter fuel_Type" name="fuel_Type" id="fuel_Type" th:value="${fuel_Type}"></input> </td></tr>
+  <tr><td><label>Power Steering: </label></td>
+  <td><input type="text" placeholder="enter powerSteering" name="powerSteering" id="powerSteering" th:value="${powerSteering}"></input></td></tr>
+  <tr><td><label>Break System: </label></td>
+  <td><input type="text" placeholder="enter breakSystem"  name="breakSystem" id="breakSystem" th:value="${breakSystem}"></input></td></tr>
+  <tr><td><label>Show Price:</label></td>
+  <td><input type="text" placeholder="enter showroom_Price" max="7000000" step=".025" value="0.00" name="showroom_Price" id="showroom_Price" th:value="${showroom_Price}"></input></td></tr>
+  <tr><td><label>Mileage:  </label></td>
+  <td><input type="text" placeholder="enter mileage" name="mileage" id="mileage" th:value="${mileage}"></input></td></tr>
+  <tr><td><label>Seating Capacity</label></td>
+  <td><input type="text" placeholder="enter seating_Capacity"  name="seating_Capacity" id="seating_Capacity" th:value="${seating_Capacity}"></input></td></tr>
+  <tr><td><label>Engine Capacity:  </label></td>
+  <td><input type="text" placeholder="enter engine_Capacity" name="engine_Capacity" id="engine_Capacity" th:value="${engine_Capacity}"></input></td></tr>
+  <tr><td><label>Gear Type:</label></td>
+  <td><input type="text" placeholder="enter gear_Type" name="gear_Type" id="gear_Type" th:value="${gear_Type}"></input></td></tr>
+  <tr><td><label>Image URL:  </label></td>
+  <td><input type="text" placeholder="enter image_URL" name="image_URL" id="image_URL" th:value="${image_URL}"></input></td></tr>
+  <tr><td><button  class="insert" style="color: white">Update</button><td><tr></tbody>
+</table>
+</form>
+</div>
+</body>
+</html>

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <!---Fontawesome CDN Link-->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
+<style>
+*{
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
+  list-style: none;
+  box-sizing: border-box;
+}
+body{
+  font-family: montserrat;
+  	background-color: lightblue;
+    background-image: url("https://www.mercedes-benz.com/en/vehicles/passenger-cars/eqs-suv/_jcr_content/root/slider/sliderchilditems/slideritem/image/MQ7-0-image-20220916083912/01-mercedes-benz-eqs-suv-livestream-3400x1440.jpeg");
+opacity: 0.1px;
+}
+nav{
+  background: #022f69;
+  height: 80px;
+  width: 100%;
+}
+label.logo{
+  color: #fff;
+  font-size: 35px;
+  line-height: 80px;
+  padding: 0 100px;
+  font-weight: bold;
+}
+a.active,a:hover{
+  background: #fff;
+  transition: .5s;
+  color: #022f69;
+}
+.checkbtn{
+  font-size: 30px;
+  color: #fff;
+  float: right;
+  line-height: 80px;
+  margin-right: 40px;
+  cursor: pointer;
+  display: none;
+}
+#check{
+  display: none;
+}
+@media (max-width: 968px){
+  label.logo{
+    font-size: 30px;
+    padding-left: 50px;
+  }
+  nav ul li a{
+    font-size: 16px;
+  }
+}
+@media (max-width: 875px){
+  .checkbtn{
+    display: block;
+  }
+
+  #check:checked ~ ul{
+    left: 0;
+  }
+}
+.search i {
+	top: 15px;
+	left: 150px;
+	position: absolute
+}
+.whole {
+	display: flex;
+	width: 100%;
+	height: 500px;
+	justify-content: space-around;
+	position: relative;
+}
+.left {
+	left: 50px;
+	right: 50%;
+	position: absolute;
+	background: pink;
+    height: 47px;
+    margin-top: 207px;
+    margin-left: 317px;
+    }
+.right {
+    right: 178px;
+    left: 8%;
+    position: absolute;
+    top: 381px;
+}
+.search input {
+	height: 40px;
+	width: 170px;
+	border-radius: 15px;
+	position: relative;
+}
+#carName{
+    width: 502px;
+    height: 47px;
+}
+.fa{
+    font-family: "Font Awesome 5 Free";
+    padding-left: 8px;
+    font-size: 25px;
+    padding-top: 6px;
+    color: blue;
+    margin:-41px;
+    margin-left: 448px;
+    position: absolute;
+    }
+.loginForm{
+    background: white;
+    margin-top: -166px;
+    margin-right: 150px;
+    margin-left: 250px;
+    border-color: #022f69;
+    border: solid;
+}
+button.login{
+    width: 138px;
+    height: 51px;
+    background: #022f69;
+    border-radius: 36px;
+    font-size: 18px;
+    margin-left: 459px;
+}
+ button.insert{
+    width: 120px;
+    height: 36px;
+    background: white;
+    border-radius: 16px;
+    font-size: 18px;
+    margin-left: 800px;
+    margin-left: 1228px;
+    margin-top: 1px;
+    position: relative;
+    top: -56px;
+    }
+    input{
+    font-size: 35px;
+    border-color: rebeccapurple;
+}
+</style>
+<script>
+	window.history.forward();
+	function noBack() {
+	window.history.forward();
+	}	
+</script>
+</head>
+<body>
+  <nav>
+    <input type="checkbox" id="check">
+    <label for="check" class="checkbtn">
+    <i class="fas fa-bars"></i>
+    </label>
+    <label class="logo">CarInfo</label>
+    <div>
+    <form action="/">
+<button class="insert">homePage</button>
+</form></div>
+  </nav><br><br>
+ 	<div class="right">
+				<form action="logout" class="loginForm" method="post" autocomplete="off">
+				<h1 style="padding-left: 218px;padding-top:28px; color:#022f69;font-size: 47px">Admin Panel</h1>
+				<input type="text" id="adminUserName" placeholder="enter username" name="adminUserName" onclick="login()" style="margin-left: 160px;margin-top: 32px;size: 20px;" required></input> <br><br>
+				<input type="password" placeholder="enter password" id="password" onclick="login()" name="password" style="margin-left: 160px"></input> <br>
+				<p style="color: red;padding-left: 261px; font-size: 25px;" id="loginStatus"  th:text="${loginStatus}" />
+			    <a href="http://localhost:8080/forgot" style="padding-left: 154px;font-size: 25px;" onclick="this.href='forgot?adminUserName='+getElementById('adminUserName').value">forgot password?</a><br>	
+				<button class="login" style="color: white;">Login</button><br><br> 
+				</form><br><br>		
+			</div>
+	     </div>
+<script>
+	  const pasteBox = document.getElementById("password");
+	  pasteBox.onpaste = e => {
+	    e.preventDefault();
+	    return false;
+	  };
+	  function login(){
+		  let updateInfo=document.getElementById("loginStatus")
+	      updateInfo.style.display="none";
+		  }
+	  function preventBack() {
+		    window.history.forward(); 
+		}  
+		setTimeout("preventBack()", 0);	  
+		window.onunload = function () { null }; 
+	</script>
+</body>
+</html>

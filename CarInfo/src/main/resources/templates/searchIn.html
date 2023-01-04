@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>Responsive Navigation Bar</title>
+    <!---Fontawesome CDN Link-->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
+<style>
+*{
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
+  list-style: none;
+  box-sizing: border-box;
+}
+body{
+   font-family: montserrat;
+   background-image: url("https://www.mercedes-benz.com/en/vehicles/passenger-cars/eqs-suv/_jcr_content/root/slider/sliderchilditems/slideritem/image/MQ7-0-image-20220916083912/01-mercedes-benz-eqs-suv-livestream-3400x1440.jpeg");
+   opacity: 0.1px;
+}
+nav{
+  background: #022f69;
+  height: 80px;
+  width: 100%;
+}
+label.logo{
+  color: #fff;
+  font-size: 35px;
+  line-height: 80px;
+  padding: 0 100px;
+  font-weight: bold;
+}
+nav ul{
+  float: right;
+  margin-right: 20px;
+  margin-top: -224px;
+}
+nav ul li{
+  display: inline-block;
+  line-height: 80px;
+  margin: 0 5px;
+}
+nav ul li a{
+  color: #fff;
+  font-size: 17px;
+  padding: 7px 13px;
+  border-radius: 3px;
+  text-transform: uppercase;
+}
+a.active,a:hover{
+  background: #fff;
+  transition: .5s;
+  color: #022f69;
+}
+.checkbtn{
+  font-size: 30px;
+  color: #fff;
+  float: right;
+  line-height: 80px;
+  margin-right: 40px;
+  cursor: pointer;
+  display: none;
+}
+#check{
+  display: none;
+}
+@media (max-width: 968px){
+  label.logo{
+    font-size: 30px;
+    padding-left: 50px;
+  }
+  nav ul li a{
+    font-size: 16px;
+  }
+}
+@media (max-width: 875px){
+  .checkbtn{
+    display: block;
+  }
+  nav ul{
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    background: #27282c;
+    top: 80px;
+    left: -100%;
+    text-align: center;
+    transition: all .5s;  
+  }
+  nav ul li{
+    display: block;
+    margin: 50px 0;
+    line-height: 30px;
+  }
+  nav ul li a{
+    font-size: 20px;
+  }
+  a:hover, a.active{
+    background: none;
+    color: #0082e6;
+  }
+  #check:checked ~ ul{
+    left: 0;
+  }
+}
+.search i {
+	top: 15px;
+	left: 150px;
+	position: absolute
+}
+.whole {
+	display: flex;
+	width: 100%;
+	justify-content: space-around;
+	position: relative;
+	margin-top: -54px;
+	height: 202px;
+}
+.left {
+	left: 50px;
+	right: 50%;
+	position: absolute;
+    height: 47px;
+    margin-top: 12px;
+    margin-left: 485px;
+}
+.right {
+	right: 50px;
+	left: 50%;
+	position: absolute;
+}
+.search input {
+	height: 40px;
+	width: 170px;
+	border-radius: 15px;
+	position: relative;
+}
+#carName{
+	width: 502px;
+    height: 47px;
+	margin-top: -60px;
+}
+.fa{
+    font-family: "Font Awesome 5 Free";
+    padding-left: 8px;
+    font-size: 25px;
+	padding-top: 26px;
+    color: #022f69;
+    margin:-60px;
+	margin-left: 450px;
+    position: absolute;
+}
+    button.insert{
+    width: 120px;
+    height: 36px;
+    background: white;
+    border-radius: 16px;
+    font-size: 18px;
+    margin-left: 800px;
+    margin-left: 1030px;
+    margin-top: 1px;
+    }
+    input{
+    border-color: rebeccapurple;
+    font-size: 28px;  
+}
+#cars {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+#cars td, #cars th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+#cars tr:nth-child(even){background-color: #f2f2f2;}
+
+#cars tr:hover {background-color: #ddd;}
+
+#cars th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #022f69;
+  color: white;
+}
+</style>
+</head>
+<body>
+  <nav>
+    <input type="checkbox" id="check">
+    <label for="check" class="checkbtn">
+    <i class="fas fa-bars"></i>
+    </label>
+    <label class="logo">CarInfo</label>
+       <div class="whole">
+		 <div class="left">
+				<input type="text" placeholder="Search here......" name="carName"
+					id="carName"> <a href="http://localhost:8080/searchCar"
+					onclick="this.href='searchCar?carName='+getElementById('carName').value">
+					<i class="fa fa-search" aria-hidden="true" width="300px"></i>
+				</a></input> <br> 
+		  </div>
+<form action="prelogout">
+	<button class="insert" style="color: black">Logout</button>
+</form>
+</div>
+</nav><br><br>
+			<div class="box">	
+			<h1 th:text="${Notfound}" style="padding-left: 600px; color: whitesmoke;"/>					
+			<div th:each="carList:${carList}">
+<table id="cars">
+<tr>
+    <th>Image</th>
+    <th>Car Name</th>
+    <th>Car Company</th>
+    <th>Fuel Type</th>
+    <th>Power Steering</th>
+    <th>Break System</th>
+    <th>Showroom Price</th>
+    <th>Onroad Price</th>
+    <th>Mileage</th>
+    <th>Seating Capacity</th>
+    <th>Engine Capacity</th>
+    <th>Gear Type</th>
+    <th>Status</th>
+   
+ </tr>
+ <tr>
+ <td><img th:src="${carList.image_URL}" style="width: 300px;height: 202px;"></td>
+    <td><h4 th:text="${carList.carName}" /></td>
+    <td><h4 th:text="${carList.carCompany}" /></td>
+    <td><p th:text="${carList.fuel_Type}" /></td>
+    <td><p th:text="${carList.powerSteering}" /></td>
+    <td><p th:text="${carList.breakSystem}" /></td>
+    <td><p  th:text="${carList.price}" /></td>    
+    <td><p th:text="${carList.price2}" /></td> 
+    <td><p th:text="${carList.mileage}" /></td>
+    <td><p th:text="${carList.seating_Capacity}" /></td>
+    <td><p th:text="${carList.engine_Capacity}" /></td>
+    <td><p th:text="${carList.gear_Type}" /></td>
+    <td><p th:text="${carList.active}" /></td>
+  </tr>
+</table> <br><p th:text="${Notfound}" />								
+</div>
+</div>
+</div>
+</body>
+</html>

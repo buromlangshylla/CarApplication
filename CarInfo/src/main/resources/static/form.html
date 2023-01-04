@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Page</title>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+<link rel="stylesheet" href="form.css"></link>
+<link rel="stylesheet" href="boo.css">
+<style>
+body {
+	display: flex;
+	justify-content: space-around;
+}
+
+button {
+	color: red;
+	border-color: blue;
+}
+
+* {
+	font-weight: bolder;
+}
+
+input {
+	border-color: pink;
+}
+
+.search input {
+	height: 40px;
+	width: 170px;
+	border-radius: 15px;
+	position: relative;
+}
+
+input {
+	height: 30px;
+	width: 170px;
+	border-radius: 15px;
+}
+
+button {
+	height: 30px;
+	width: 100px;
+	border-radius: 15px;
+}
+
+.search i {
+	top: 15px;
+	left: 150px;
+	position: absolute
+}
+
+#choose {
+	cursor: pointer;
+}
+
+#choose span {
+	margin-left: 30px;
+	border: 2px solid black;
+	padding: 2px;
+	border-radius: 15px;
+}
+
+#choose span:hover {
+	border: 4px solid rgb(233, 142, 233);
+	padding: 2px;
+	background-color: black;
+	color: white;
+	border-radius: 15px;
+}
+
+#insertForm input {
+	margin-left: 20px;
+}
+
+#insertForm button {
+	margin-left: 205px;
+}
+
+.whole {
+	display: flex;
+	width: 100%;
+	height: 500px;
+	justify-content: space-around;
+	position: relative;
+}
+
+.left {
+	left: 50px;
+	right: 50%;
+	position: absolute;
+}
+
+.right {
+	right: 50px;
+	left: 50%;
+	position: absolute;
+}
+
+body {
+	background-color: lightblue;
+}
+</style>
+</head>
+<body>
+	<div class="whole">
+		<div class="left">
+			<div class="search" id="search">
+				<input type="text" placeholder="Search here" name="carName"
+					id="carName"> <a href="http://localhost:8080/searchCar"
+					onclick="this.href='searchCar?carName='+getElementById('carName').value">
+					<i class="fa fa-search" aria-hidden="true" width="300px"></i>
+				</a></input> <br> <br>
+				<div class="box">
+					<div th:each="carList:${carList}">
+						<img th:src="${carList.image_URL}"> <br> <br> <span><label
+							style="color: blue">Car Name: </label></span>
+						<h4 th:text="${carList.carName}" />
+						<span><label style="color: blue">Car Company: </label></span>
+						<h4 th:text="${carList.carCompany}" />
+						<span><label style="color: blue"> Fuel Type: </label></span>
+						<p th:text="${carList.fuel_Type}" />
+						<span><label style="color: blue">Power String: </label></span>
+						<p th:text="${carList.powerSteering}" />
+						<span><label style="color: blue">Break System: </label></span>
+						<p th:text="${carList.breakSystem}" />
+						<span><label style="color: blue">ShowRoom Price:</label></span>
+						<p th:text="${carList.showroom_Price}" />
+						<span><label style="color: blue">Onroad Price:</label></span>
+						<p th:text="${carList.onroad_Price}" />
+						<span><label style="color: blue">Mileage: </label></span>
+						<p th:text="${carList.mileage}" />
+						<span><label style="color: blue">Seating Capacity:</label></span>
+						<p th:text="${carList.seating_Capacity}" />
+						<span><label style="color: blue"> Engine Capacity:</label></span>
+						<p th:text="${carList.engine_Capacity}" />
+						<span><label style="color: blue">Gear Type:</label></span>
+						<p th:text="${carList.gear_Type}" />
+					</div>
+				</div>
+			</div>
+		</div>
+					<p style="color: red" id="Notfound"/>
+
+
+		<div class="right">
+			<div id="search">
+				<form action="login" method="post">
+					Admin Panel: <input type="text" placeholder="enter username"
+						name="adminUserName"></input> <input type="password"
+						placeholder="enter password" name="password"></input>
+					<p style="color: red; display: none;" id="loginFailed"></p>
+					<button>Login</button>
+					<br> <br> <span id="choose" style="display: none;">
+						<span onclick="update()">update</span> <span onclick="format()">delete</span>
+						<span onclick="insert()">insert</span>
+						<p style="color: red" id="updateInfo" th:text="${updated}" />
+
+					</span>
+
+
+				</form>
+				<br>
+				<form action="update" style="display: none;" method="post"
+					id="updateForm">
+					To update: <input type="text" placeholder="enter carId"
+						name="carId"></input> <br> <br> <select name="option"
+						id="option">
+						<option value="">-Please choose the field to update-</option>
+						<option value="carName">carName</option>
+						<option value="carCompany">carCompany</option>
+						<option value="fuel_Type">fuel_Type</option>
+						<option value="powerSteering">powerSteering</option>
+						<option value="breakSystem">breakSystem</option>
+						<option value="showroom_Price">showroom_Price</option>
+						<option value="mileage">mileage</option>
+						<option value="seating_Capacity">seating_Capacity</option>
+						<option value="engine_Capacity">engine_Capacity</option>
+						<option value="gear_Type">gear_Type</option>
+						<option value="image_URL">image_URL</option>
+					</select> <br> <br> <input type="text" placeholder="enter value"
+						name="carDetails"></input><br>
+					<!--  <p style="color: red" th:text="${updated}" /> -->
+					<button>update</button>
+				</form>
+				<br>
+
+				<form action="delete" style="display: none;" id="deleteForm"
+					method="post">
+					To Delete Details: <input type="text"
+						placeholder="enter carId to be deleted" name="carId"></input>
+					<!--<p style="color: lightgreen" th:text="${deleted}" /> -->
+					<button>delete</button>
+				</form>
+				<br>
+				<form action="insert" style="display: none;" id="insertForm"
+					method="post" th:object=${Car_Details}>
+					To Insert Details: <br> <input type="text"
+						placeholder="enter carName" name="carName" required></input> <input
+						type="text" placeholder="enter CompanyName" name="carCompany"
+						required></input><br> <br> <input type="text"
+						placeholder="enter fuel_Type" name="fuel_Type" required></input> <input
+						type="text" placeholder="enter powerSteering" name="powerSteering"
+						required></input><br> <br> <input type="text"
+						placeholder="enter breakSystem" name="breakSystem" required></input>
+					<input type="text" placeholder="enter showroom_Price"
+						name="showroom_Price" required></input><br> <br> <input
+						type="text" placeholder="enter seating_Capacity"
+						name="seating_Capacity" required></input> <input type="text"
+						placeholder="enter gear_Type" name="gear_Type" required></input><br>
+
+					<br> <input type="text" placeholder="enter image_URL"
+						name="image_URL" required></input> <input type="text"
+						placeholder="enter mileage" name="mileage" required></input><br>
+
+					<br> <input type="text" placeholder="enter engine_Capacity"
+						name="engine_Capacity" required></input> <input type="text"
+						placeholder="enter active Status" name="active"></input><br>
+					<!--<p style="color: red" th:text="${inserted}" /> -->
+					<button>insert</button>
+				</form>
+			</div>
+		</div>
+	</div>
+	<script src="./boo.js"></script>
+	<script>  
+message="[[${loginStatus}]]";
+operation="[[${operation}]]";
+
+Notfound="[[${Notfound}]]";
+
+var xy=document.getElementById("Notfound");
+ xy.style.display="block";
+ xy.innerHTML = Notfound;
+
+ if(message=="verified"){  
+            var x = document.getElementById("choose");
+             x.style.display = "block";       
+        }
+        else
+            {
+        var y = document.getElementById("loginFailed");
+            y.style.display = "block";
+            y.innerHTML=message;
+            }  
+       
+            function update()
+{
+    let update=document.getElementById("updateForm")
+    let format=document.getElementById("deleteForm")
+    let insert=document.getElementById("insertForm")
+     let updateInfo=document.getElementById("updateInfo")
+        updateInfo.style.display="none";
+    format.style.display="none";
+    insert.style.display="none";
+    update.style.display="block";
+}
+
+function format()
+{
+    let update=document.getElementById("updateForm")
+    let format=document.getElementById("deleteForm")
+    let insert=document.getElementById("insertForm")
+     let updateInfo=document.getElementById("updateInfo")
+        updateInfo.style.display="none";
+    insert.style.display="none";
+    update.style.display="none";
+        format.style.display="block";
+
+} 
+
+function insert()
+{
+    let update=document.getElementById("updateForm")
+    let format=document.getElementById("deleteForm")
+    let insert=document.getElementById("insertForm")
+        let updateInfo=document.getElementById("updateInfo")
+        updateInfo.style.display="none";
+    format.style.display="none";
+    update.style.display="none";
+        insert.style.display="block";  
+} 
+
+
+</script>
+</body>
+</html>
